@@ -35,25 +35,25 @@
 ## Static Mode
 
 ```go
-site := astrojsaws.NewStaticAstroSite(this, jsii.String("AstroSite"), &StaticAstroSiteProps{
-	StaticDir: jsii.String("/path/to/dist"),
+const site = new astrojsaws.StaticAstroSite(this, "AstroSite", {
+  staticDir: "/path/to/dist",
 })
 ```
 
 ## Lambda Mode
 
 ```go
-site := astrojsaws.NewLambdaAstroSite(this, jsii.String("AstroSite"), &LambdaAstroSiteProps{
-	ServerEntry: jsii.String("/path/to/dist/server/entry.mjs"),
-	StaticDir: jsii.String("/path/to/dist/client"),
+const site = new astrojsaws.LambdaAstroSite(this, "AstroSite", {
+  serverEntry: "/path/to/dist/server/entry.mjs",
+  staticDir: "/path/to/dist/client",
 })
 ```
 
 ## Edge Mode
 
 ```go
-site := astrojsaws.NewEdgeAstroSite(this, jsii.String("AstroSite"), &EdgeAstroSiteProps{
-	ServerEntry: jsii.String("/path/to/dist/server/entry.mjs"),
-	StaticDir: jsii.String("/path/to/dist/client"),
+const site = new astrojsaws.EdgeAstroSite(this, "AstroSite", {
+  serverEntry: "/path/to/dist/server/entry.mjs",
+  staticDir: "/path/to/dist/client",
 })
 ```
