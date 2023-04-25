@@ -5,10 +5,12 @@ import (
 	_jsii_ "github.com/aws/jsii-runtime-go/runtime"
 	_init_ "github.com/helbing/astrojs-aws-go/construct/jsii"
 
+	"github.com/aws/aws-cdk-go/awscdk/v2/awscloudfront"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awscloudfrontorigins"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awslambda"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awslambdanodejs"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awss3"
+	"github.com/aws/aws-cdk-go/awscdkapigatewayv2alpha/v2"
 	"github.com/aws/constructs-go/constructs/v10"
 	"github.com/helbing/astrojs-aws-go/construct/internal"
 )
@@ -22,16 +24,28 @@ type AstroSiteConstruct interface {
 	Node() constructs.Node
 	// New bucket.
 	// Experimental.
-	NewBucket(scope constructs.Construct, staticDir *string, props *awss3.BucketProps) awss3.Bucket
+	NewBucket(scope constructs.Construct, whEnabled *bool, props *AssetsOptions) awss3.Bucket
+	// New CloudFront distribution.
+	// Experimental.
+	NewDistribution(scope constructs.Construct, defaultBehavior *awscloudfront.BehaviorOptions, props *CfOptions) awscloudfront.Distribution
 	// New nodejs function.
 	// Experimental.
 	NewFunction(scope constructs.Construct, serverEntry *string, props *ServerOptions) awslambdanodejs.NodejsFunction
+	// New HttpApi Gateway origin.
+	// Experimental.
+	NewHttpApiGatewayOrigin(httpApi awscdkapigatewayv2alpha.HttpApi) awscloudfrontorigins.HttpOrigin
+	// New HttpApi Gateway.
+	// Experimental.
+	NewHttpApiGw(scope constructs.Construct, fn awslambdanodejs.NodejsFunction, props *GwOptions) awscdkapigatewayv2alpha.HttpApi
 	// New S3 origin.
 	// Experimental.
 	NewS3Origin(scope constructs.Construct, bucket awss3.Bucket) awscloudfrontorigins.S3Origin
-	// Parse routes from directory if the item is directory will parse to /item/* if the item is file will parse to /item.
+	// Parse routes from directory.
+	//
+	// if the item is directory will parse to {"/item/*": "/item/*"} or {"/item/{proxy+}": "/item/{proxy}"}
+	// if the item is file will parse to {"/item": "/item"}.
 	// Experimental.
-	ParseRoutesFromDir(dir *string) *[]*string
+	ParseRoutesFromDir(dir *string, isCf *bool) *map[string]*string
 	// Transform string to Runtime.
 	// Experimental.
 	StrToRuntime(str *string) awslambda.Runtime
@@ -121,8 +135,8 @@ func AstroSiteConstruct_IsConstruct(x interface{}) *bool {
 	return returns
 }
 
-func (a *jsiiProxy_AstroSiteConstruct) NewBucket(scope constructs.Construct, staticDir *string, props *awss3.BucketProps) awss3.Bucket {
-	if err := a.validateNewBucketParameters(scope, staticDir, props); err != nil {
+func (a *jsiiProxy_AstroSiteConstruct) NewBucket(scope constructs.Construct, whEnabled *bool, props *AssetsOptions) awss3.Bucket {
+	if err := a.validateNewBucketParameters(scope, whEnabled, props); err != nil {
 		panic(err)
 	}
 	var returns awss3.Bucket
@@ -130,7 +144,23 @@ func (a *jsiiProxy_AstroSiteConstruct) NewBucket(scope constructs.Construct, sta
 	_jsii_.Invoke(
 		a,
 		"newBucket",
-		[]interface{}{scope, staticDir, props},
+		[]interface{}{scope, whEnabled, props},
+		&returns,
+	)
+
+	return returns
+}
+
+func (a *jsiiProxy_AstroSiteConstruct) NewDistribution(scope constructs.Construct, defaultBehavior *awscloudfront.BehaviorOptions, props *CfOptions) awscloudfront.Distribution {
+	if err := a.validateNewDistributionParameters(scope, defaultBehavior, props); err != nil {
+		panic(err)
+	}
+	var returns awscloudfront.Distribution
+
+	_jsii_.Invoke(
+		a,
+		"newDistribution",
+		[]interface{}{scope, defaultBehavior, props},
 		&returns,
 	)
 
@@ -153,6 +183,38 @@ func (a *jsiiProxy_AstroSiteConstruct) NewFunction(scope constructs.Construct, s
 	return returns
 }
 
+func (a *jsiiProxy_AstroSiteConstruct) NewHttpApiGatewayOrigin(httpApi awscdkapigatewayv2alpha.HttpApi) awscloudfrontorigins.HttpOrigin {
+	if err := a.validateNewHttpApiGatewayOriginParameters(httpApi); err != nil {
+		panic(err)
+	}
+	var returns awscloudfrontorigins.HttpOrigin
+
+	_jsii_.Invoke(
+		a,
+		"newHttpApiGatewayOrigin",
+		[]interface{}{httpApi},
+		&returns,
+	)
+
+	return returns
+}
+
+func (a *jsiiProxy_AstroSiteConstruct) NewHttpApiGw(scope constructs.Construct, fn awslambdanodejs.NodejsFunction, props *GwOptions) awscdkapigatewayv2alpha.HttpApi {
+	if err := a.validateNewHttpApiGwParameters(scope, fn, props); err != nil {
+		panic(err)
+	}
+	var returns awscdkapigatewayv2alpha.HttpApi
+
+	_jsii_.Invoke(
+		a,
+		"newHttpApiGw",
+		[]interface{}{scope, fn, props},
+		&returns,
+	)
+
+	return returns
+}
+
 func (a *jsiiProxy_AstroSiteConstruct) NewS3Origin(scope constructs.Construct, bucket awss3.Bucket) awscloudfrontorigins.S3Origin {
 	if err := a.validateNewS3OriginParameters(scope, bucket); err != nil {
 		panic(err)
@@ -169,16 +231,16 @@ func (a *jsiiProxy_AstroSiteConstruct) NewS3Origin(scope constructs.Construct, b
 	return returns
 }
 
-func (a *jsiiProxy_AstroSiteConstruct) ParseRoutesFromDir(dir *string) *[]*string {
+func (a *jsiiProxy_AstroSiteConstruct) ParseRoutesFromDir(dir *string, isCf *bool) *map[string]*string {
 	if err := a.validateParseRoutesFromDirParameters(dir); err != nil {
 		panic(err)
 	}
-	var returns *[]*string
+	var returns *map[string]*string
 
 	_jsii_.Invoke(
 		a,
 		"parseRoutesFromDir",
-		[]interface{}{dir},
+		[]interface{}{dir, isCf},
 		&returns,
 	)
 

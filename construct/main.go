@@ -7,12 +7,19 @@ import (
 )
 
 func init() {
+	_jsii_.RegisterStruct(
+		"@astrojs-aws/construct.AssetsOptions",
+		reflect.TypeOf((*AssetsOptions)(nil)).Elem(),
+	)
 	_jsii_.RegisterClass(
 		"@astrojs-aws/construct.AstroSiteConstruct",
 		reflect.TypeOf((*AstroSiteConstruct)(nil)).Elem(),
 		[]_jsii_.Member{
 			_jsii_.MemberMethod{JsiiMethod: "newBucket", GoMethod: "NewBucket"},
+			_jsii_.MemberMethod{JsiiMethod: "newDistribution", GoMethod: "NewDistribution"},
 			_jsii_.MemberMethod{JsiiMethod: "newFunction", GoMethod: "NewFunction"},
+			_jsii_.MemberMethod{JsiiMethod: "newHttpApiGatewayOrigin", GoMethod: "NewHttpApiGatewayOrigin"},
+			_jsii_.MemberMethod{JsiiMethod: "newHttpApiGw", GoMethod: "NewHttpApiGw"},
 			_jsii_.MemberMethod{JsiiMethod: "newS3Origin", GoMethod: "NewS3Origin"},
 			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
 			_jsii_.MemberMethod{JsiiMethod: "parseRoutesFromDir", GoMethod: "ParseRoutesFromDir"},
@@ -26,8 +33,8 @@ func init() {
 		},
 	)
 	_jsii_.RegisterStruct(
-		"@astrojs-aws/construct.DistributionOptions",
-		reflect.TypeOf((*DistributionOptions)(nil)).Elem(),
+		"@astrojs-aws/construct.CfOptions",
+		reflect.TypeOf((*CfOptions)(nil)).Elem(),
 	)
 	_jsii_.RegisterClass(
 		"@astrojs-aws/construct.EdgeAstroSite",
@@ -35,11 +42,15 @@ func init() {
 		[]_jsii_.Member{
 			_jsii_.MemberProperty{JsiiProperty: "bucketArn", GoGetter: "BucketArn"},
 			_jsii_.MemberProperty{JsiiProperty: "bucketName", GoGetter: "BucketName"},
-			_jsii_.MemberProperty{JsiiProperty: "distributionDomainName", GoGetter: "DistributionDomainName"},
-			_jsii_.MemberProperty{JsiiProperty: "domainName", GoGetter: "DomainName"},
-			_jsii_.MemberMethod{JsiiMethod: "edgeFunction", GoMethod: "EdgeFunction"},
+			_jsii_.MemberProperty{JsiiProperty: "distributionId", GoGetter: "DistributionId"},
+			_jsii_.MemberProperty{JsiiProperty: "domains", GoGetter: "Domains"},
+			_jsii_.MemberProperty{JsiiProperty: "functionArn", GoGetter: "FunctionArn"},
+			_jsii_.MemberProperty{JsiiProperty: "functionName", GoGetter: "FunctionName"},
 			_jsii_.MemberMethod{JsiiMethod: "newBucket", GoMethod: "NewBucket"},
+			_jsii_.MemberMethod{JsiiMethod: "newDistribution", GoMethod: "NewDistribution"},
 			_jsii_.MemberMethod{JsiiMethod: "newFunction", GoMethod: "NewFunction"},
+			_jsii_.MemberMethod{JsiiMethod: "newHttpApiGatewayOrigin", GoMethod: "NewHttpApiGatewayOrigin"},
+			_jsii_.MemberMethod{JsiiMethod: "newHttpApiGw", GoMethod: "NewHttpApiGw"},
 			_jsii_.MemberMethod{JsiiMethod: "newS3Origin", GoMethod: "NewS3Origin"},
 			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
 			_jsii_.MemberMethod{JsiiMethod: "parseRoutesFromDir", GoMethod: "ParseRoutesFromDir"},
@@ -56,18 +67,25 @@ func init() {
 		"@astrojs-aws/construct.EdgeAstroSiteProps",
 		reflect.TypeOf((*EdgeAstroSiteProps)(nil)).Elem(),
 	)
+	_jsii_.RegisterStruct(
+		"@astrojs-aws/construct.GwOptions",
+		reflect.TypeOf((*GwOptions)(nil)).Elem(),
+	)
 	_jsii_.RegisterClass(
 		"@astrojs-aws/construct.LambdaAstroSite",
 		reflect.TypeOf((*LambdaAstroSite)(nil)).Elem(),
 		[]_jsii_.Member{
-			_jsii_.MemberMethod{JsiiMethod: "api", GoMethod: "Api"},
 			_jsii_.MemberProperty{JsiiProperty: "bucketArn", GoGetter: "BucketArn"},
 			_jsii_.MemberProperty{JsiiProperty: "bucketName", GoGetter: "BucketName"},
-			_jsii_.MemberProperty{JsiiProperty: "distributionDomainName", GoGetter: "DistributionDomainName"},
-			_jsii_.MemberProperty{JsiiProperty: "domainName", GoGetter: "DomainName"},
-			_jsii_.MemberMethod{JsiiMethod: "lambdaFunction", GoMethod: "LambdaFunction"},
+			_jsii_.MemberProperty{JsiiProperty: "distributionId", GoGetter: "DistributionId"},
+			_jsii_.MemberProperty{JsiiProperty: "domains", GoGetter: "Domains"},
+			_jsii_.MemberProperty{JsiiProperty: "functionArn", GoGetter: "FunctionArn"},
+			_jsii_.MemberProperty{JsiiProperty: "functionName", GoGetter: "FunctionName"},
 			_jsii_.MemberMethod{JsiiMethod: "newBucket", GoMethod: "NewBucket"},
+			_jsii_.MemberMethod{JsiiMethod: "newDistribution", GoMethod: "NewDistribution"},
 			_jsii_.MemberMethod{JsiiMethod: "newFunction", GoMethod: "NewFunction"},
+			_jsii_.MemberMethod{JsiiMethod: "newHttpApiGatewayOrigin", GoMethod: "NewHttpApiGatewayOrigin"},
+			_jsii_.MemberMethod{JsiiMethod: "newHttpApiGw", GoMethod: "NewHttpApiGw"},
 			_jsii_.MemberMethod{JsiiMethod: "newS3Origin", GoMethod: "NewS3Origin"},
 			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
 			_jsii_.MemberMethod{JsiiMethod: "parseRoutesFromDir", GoMethod: "ParseRoutesFromDir"},
@@ -94,10 +112,13 @@ func init() {
 		[]_jsii_.Member{
 			_jsii_.MemberProperty{JsiiProperty: "bucketArn", GoGetter: "BucketArn"},
 			_jsii_.MemberProperty{JsiiProperty: "bucketName", GoGetter: "BucketName"},
-			_jsii_.MemberProperty{JsiiProperty: "distributionDomainName", GoGetter: "DistributionDomainName"},
-			_jsii_.MemberProperty{JsiiProperty: "domainName", GoGetter: "DomainName"},
+			_jsii_.MemberProperty{JsiiProperty: "distributionId", GoGetter: "DistributionId"},
+			_jsii_.MemberProperty{JsiiProperty: "domains", GoGetter: "Domains"},
 			_jsii_.MemberMethod{JsiiMethod: "newBucket", GoMethod: "NewBucket"},
+			_jsii_.MemberMethod{JsiiMethod: "newDistribution", GoMethod: "NewDistribution"},
 			_jsii_.MemberMethod{JsiiMethod: "newFunction", GoMethod: "NewFunction"},
+			_jsii_.MemberMethod{JsiiMethod: "newHttpApiGatewayOrigin", GoMethod: "NewHttpApiGatewayOrigin"},
+			_jsii_.MemberMethod{JsiiMethod: "newHttpApiGw", GoMethod: "NewHttpApiGw"},
 			_jsii_.MemberMethod{JsiiMethod: "newS3Origin", GoMethod: "NewS3Origin"},
 			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
 			_jsii_.MemberMethod{JsiiMethod: "parseRoutesFromDir", GoMethod: "ParseRoutesFromDir"},

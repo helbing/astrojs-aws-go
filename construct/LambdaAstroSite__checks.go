@@ -8,17 +8,39 @@ import (
 
 	_jsii_ "github.com/aws/jsii-runtime-go/runtime"
 
+	"github.com/aws/aws-cdk-go/awscdk/v2/awscloudfront"
+	"github.com/aws/aws-cdk-go/awscdk/v2/awslambdanodejs"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awss3"
+	"github.com/aws/aws-cdk-go/awscdkapigatewayv2alpha/v2"
 	"github.com/aws/constructs-go/constructs/v10"
 )
 
-func (l *jsiiProxy_LambdaAstroSite) validateNewBucketParameters(scope constructs.Construct, staticDir *string, props *awss3.BucketProps) error {
+func (l *jsiiProxy_LambdaAstroSite) validateNewBucketParameters(scope constructs.Construct, whEnabled *bool, props *AssetsOptions) error {
 	if scope == nil {
 		return fmt.Errorf("parameter scope is required, but nil was provided")
 	}
 
-	if staticDir == nil {
-		return fmt.Errorf("parameter staticDir is required, but nil was provided")
+	if whEnabled == nil {
+		return fmt.Errorf("parameter whEnabled is required, but nil was provided")
+	}
+
+	if err := _jsii_.ValidateStruct(props, func() string { return "parameter props" }); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (l *jsiiProxy_LambdaAstroSite) validateNewDistributionParameters(scope constructs.Construct, defaultBehavior *awscloudfront.BehaviorOptions, props *CfOptions) error {
+	if scope == nil {
+		return fmt.Errorf("parameter scope is required, but nil was provided")
+	}
+
+	if defaultBehavior == nil {
+		return fmt.Errorf("parameter defaultBehavior is required, but nil was provided")
+	}
+	if err := _jsii_.ValidateStruct(defaultBehavior, func() string { return "parameter defaultBehavior" }); err != nil {
+		return err
 	}
 
 	if err := _jsii_.ValidateStruct(props, func() string { return "parameter props" }); err != nil {
@@ -35,6 +57,30 @@ func (l *jsiiProxy_LambdaAstroSite) validateNewFunctionParameters(scope construc
 
 	if serverEntry == nil {
 		return fmt.Errorf("parameter serverEntry is required, but nil was provided")
+	}
+
+	if err := _jsii_.ValidateStruct(props, func() string { return "parameter props" }); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (l *jsiiProxy_LambdaAstroSite) validateNewHttpApiGatewayOriginParameters(httpApi awscdkapigatewayv2alpha.HttpApi) error {
+	if httpApi == nil {
+		return fmt.Errorf("parameter httpApi is required, but nil was provided")
+	}
+
+	return nil
+}
+
+func (l *jsiiProxy_LambdaAstroSite) validateNewHttpApiGwParameters(scope constructs.Construct, fn awslambdanodejs.NodejsFunction, props *GwOptions) error {
+	if scope == nil {
+		return fmt.Errorf("parameter scope is required, but nil was provided")
+	}
+
+	if fn == nil {
+		return fmt.Errorf("parameter fn is required, but nil was provided")
 	}
 
 	if err := _jsii_.ValidateStruct(props, func() string { return "parameter props" }); err != nil {
